@@ -41,6 +41,12 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     @Override
     public void printPrimes() {
-
+        for(int i = 0; i < primeList.length; i++)
+        {
+            if(primeList[i])
+            {
+              System.out.println(i);
+            }
+        }
     }
 }
