@@ -1,5 +1,7 @@
 package eratosthenesprimesieve;
+
 import java.util.*;
+
 /**
  *
  * @author Moritz
@@ -15,28 +17,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         this.uL = uL;
     }
 
-    public void main()
-    {
-      Scanner scanner = new Scanner(System.in);
-      System.out.println("1...check if a number is a prime number");
-      System.out.println("2...Show all prime numbers up to the upper limit");
-      System.out.println("3...Find 2 prime numbers for each even natural number");
-      int input = Integer.parseInt(scanner.nextLine());
-      if(input == 1)
-      {
-        isPrime(int n);
-      }
-      else if(input == 2)
-      {
-        printPrimes();
-      }
-      else if(input == 3)
-      {
-         aufgabe2();
-      }
-    }
-
-    private boolean[] boolPrimeList = new boolean[uL];
+    public boolean[] boolPrimeList = new boolean[uL];
 
     public void fillPrimeList() {
         for (int i = 2; i < boolPrimeList.length; i++) {
@@ -49,7 +30,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         for (int i = 2; i < boolPrimeList.length; i++) {
             if (boolPrimeList[i]) {
                 int x = i * i;
-                for (int j = 0; j < oG; j++) {
+                for (int j = 0; j < uL; j++) {
                     if (x == j) {
                         boolPrimeList[j] = false;
                         x = x + i;
@@ -62,24 +43,35 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     @Override
     public void printPrimes() {
-        for(int i = 0; i < boolPrimeList.length; i++)
-        {
-            if(boolPrimeList[i])
-            {
-              System.out.println(i);
+        for (int i = 0; i < boolPrimeList.length; i++) {
+            if (boolPrimeList[i]) {
+                System.out.print(i);
+            }
+            if (i < boolPrimeList.length - 1 && boolPrimeList[i]) {
+                System.out.print(", ");
             }
         }
+        System.out.println("");
     }
 
     //Augabe 2
-    public void aufgabe2(){
-    List<int> primes = new ArrayList<int>();
-
-        for(int i = 0; i < boolPrimeList.length; i++)
-        {
-            if(boolPrimeList[i])
-            {
+    public void aufgabe2() {
+        List<Integer> primes = new ArrayList<Integer>();
+        List<Integer> evenNumbers = new ArrayList<Integer>();
+        for (int i = 0; i < boolPrimeList.length; i++) {
+            if (boolPrimeList[i]) {
                 primes.add(i);
+            }
+        }
+        for (int i = 4; i < uL; i = i + 2) {
+            evenNumbers.add(i);
+        }
+
+        for (int i = 0; i < evenNumbers.size(); i++) {
+            int index = primes.size() - 1;
+            int biggestPrime = primes.get(primes.size() - 1);
+            if ((biggestPrime - 2) <= (evenNumbers.get(i))) {
+                System.out.println(uL + ": " + biggestPrime + "+" + (evenNumbers.get(i) - (biggestPrime)));
             }
         }
 
