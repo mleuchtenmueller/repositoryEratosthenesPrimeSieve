@@ -19,18 +19,18 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
 
     public boolean[] boolPrimeList = new boolean[uL];
 
-    public void fillPrimeList() {
+    public void fillPrimeList() {                       //initializes every index in the boolean array to true
         for (int i = 2; i < boolPrimeList.length; i++) {
             boolPrimeList[i] = true;
         }
     }
 
     @Override
-    public boolean isPrime(int p) {
+    public boolean isPrime(int p) {                     //Checks if the param is a prime and uses the pram as upper Limit and fills the boolean Array with true if the number at that index is a prime.
         for (int i = 2; i < boolPrimeList.length; i++) {
             if (boolPrimeList[i]) {
                 int x = i * i;
-                for (int j = 0; j < uL; j++) {
+                for (int j = 0; j <= uL; j++) {
                     if (x == j) {
                         boolPrimeList[j] = false;
                         x = x + i;
@@ -42,20 +42,19 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
     }
 
     @Override
-    public void printPrimes() {
+    public void printPrimes() {                         //Prints all values set to true in the boolean array
         for (int i = 0; i < boolPrimeList.length; i++) {
             if (boolPrimeList[i]) {
                 System.out.print(i);
             }
-            if (i < boolPrimeList.length - 1 && boolPrimeList[i]) {
+            if (i < boolPrimeList.length - 2 && boolPrimeList[i]) {
                 System.out.print(", ");
             }
         }
         System.out.println("");
     }
 
-    //Augabe 2
-    public void aufgabe2() {
+    public void aufgabe2() {                            //Searches for all even numbers up to the upper Limit and divides every even number to two primes
         List<Integer> primes = new ArrayList<Integer>();
         List<Integer> evenNumbers = new ArrayList<Integer>();
         for (int i = 0; i < boolPrimeList.length; i++) {
@@ -63,17 +62,20 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
                 primes.add(i);
             }
         }
-        for (int i = 4; i < uL; i = i + 2) {
+        for (int i = 4; i <= uL; i = i + 2) {
             evenNumbers.add(i);
         }
-
         for (int i = 0; i < evenNumbers.size(); i++) {
             int index = primes.size() - 1;
             int biggestPrime = primes.get(primes.size() - 1);
-            if ((biggestPrime - 2) <= (evenNumbers.get(i))) {
-                System.out.println(uL + ": " + biggestPrime + "+" + (evenNumbers.get(i) - (biggestPrime)));
+
+            if ((evenNumbers.get(i)) >= primes.get(i) - 2) {
+                System.out.println(evenNumbers.get(i) + " summe: " + evenNumbers.get(i) + " = " + biggestPrime + "+" + (evenNumbers.get(i) - (biggestPrime)));
+            } else {
+                for (int j = 1; j < primes.size() - 1; j++) {
+                    biggestPrime = primes.get(primes.size() - (j));
+                }
             }
         }
-
     }
 }
