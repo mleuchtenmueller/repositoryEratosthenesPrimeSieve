@@ -54,7 +54,7 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         System.out.println("");
     }
 
-    public void aufgabe2() {                            //Searches for all even numbers up to the upper Limit and divides every even number to two primes
+    public void aufgabe2() {                            //Searches for all even numbers up to the upper Limit and divides every even number into two primes
         List<Integer> primes = new ArrayList<Integer>();
         List<Integer> evenNumbers = new ArrayList<Integer>();
         for (int i = 0; i < boolPrimeList.length; i++) {
@@ -65,17 +65,15 @@ public class EratosthenesPrimeSieve implements PrimeSieve {
         for (int i = 4; i <= uL; i = i + 2) {
             evenNumbers.add(i);
         }
-        for (int i = 0; i < evenNumbers.size(); i++) {
-            int index = primes.size() - 1;
-            int biggestPrime = primes.get(primes.size() - 1);
 
-            if ((evenNumbers.get(i)) >= primes.get(i) - 2) {
-                System.out.println(evenNumbers.get(i) + " summe: " + evenNumbers.get(i) + " = " + biggestPrime + "+" + (evenNumbers.get(i) - (biggestPrime)));
-            } else {
-                for (int j = 1; j < primes.size() - 1; j++) {
-                    biggestPrime = primes.get(primes.size() - (j));
+        for (int i = 0; i < evenNumbers.size(); i++) {
+            int biggestPrime = primes.get(1);
+            for (int j = 0; j <= primes.size() - 1; j++) {
+                if (evenNumbers.get(i) >= primes.get(j) + primes.get(0)) {
+                    biggestPrime = primes.get(j);
                 }
             }
+            System.out.println(evenNumbers.get(i) + " summe: " + evenNumbers.get(i) + " = " + (evenNumbers.get(i) - (biggestPrime)) + " + " + biggestPrime);
         }
     }
 }
